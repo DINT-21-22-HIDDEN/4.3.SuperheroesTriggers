@@ -21,31 +21,12 @@
                     Value="assets/arrow.png"></Setter>
         </Style>
 
-        <Style TargetType="Image"
-               x:Key="flecha_izquierda" BasedOn="{StaticResource flechas}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=actualTextBlock, Path=Text}" Value="1">
-                    <Setter Property="Opacity" Value="0.5"></Setter>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
         <Style TargetType="TextBlock"
                x:Key="contador">
             <Setter Property="FontSize"
                     Value="20"></Setter>
             <Setter Property="FontWeight"
                     Value="Bold"></Setter>
-        </Style>
-
-        <Style TargetType="TextBlock"
-               x:Key="actual" BasedOn="{StaticResource contador}">
-            <Style.Triggers>
-                <Trigger Property="Text" Value="1">
-                    <Setter Property="Foreground"
-                    Value="Gray"></Setter>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <Style TargetType="DockPanel"
@@ -64,6 +45,16 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="Image" x:Key="imagenHeroe">
+            <Setter Property="Opacity" Value="0.5">
+                            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style TargetType="Image" x:Key="logo">
             <Setter Property="Visibility"
                     Value="Collapsed"></Setter>
@@ -157,10 +148,10 @@
                             Orientation="Horizontal"
                             HorizontalAlignment="Center">
             <Image x:Name="leftImage"
-                           Style="{StaticResource flecha_izquierda}"
+                           Style="{StaticResource flechas}"
                            MouseLeftButtonUp="leftImage_MouseLeftButtonUp"></Image>
             <TextBlock x:Name="actualTextBlock"
-                               Style="{StaticResource actual}"
+                               Style="{StaticResource contador}"
                                Margin="5,0,0,5"
                                Text="{Binding Path=Actual}"></TextBlock>
             <TextBlock Style="{StaticResource contador}"
@@ -185,7 +176,7 @@
                 </Image.RenderTransform>
             </Image>
         </StackPanel>
-        <Image Source="{Binding Path=HeroeActual.Imagen}"
+        <Image Style="{StaticResource imagenHeroe}" Source="{Binding Path=HeroeActual.Imagen}"
                        Stretch="UniformToFill"
                        Margin="10">
         </Image>
