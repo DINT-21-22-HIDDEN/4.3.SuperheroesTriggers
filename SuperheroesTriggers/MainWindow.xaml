@@ -13,6 +13,15 @@
         Background="AliceBlue"
         Icon="assets/shield.ico">
     <Window.Resources>
+        <Style TargetType="{x:Type Border}" x:Key="bordeImagen">
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=superheroeImage, Path=IsMouseOver}" Value="True">
+                    <Setter Property="BorderThickness" Value="4"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
         <Style TargetType="Image"
                x:Key="flechas">
             <Setter Property="Width"
@@ -47,19 +56,21 @@
 
         <Style TargetType="Image" x:Key="imagenHeroe">
             <Setter Property="Opacity" Value="0.5">
-                            </Setter>
+            </Setter>
+            <Setter Property="Stretch" Value="UniformToFill">
+            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Opacity" Value="1"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Style TargetType="Image" x:Key="logo">
             <Setter Property="Visibility"
                     Value="Collapsed"></Setter>
         </Style>
-        
+
         <Style TargetType="Image"
                x:Key="logoVengador"
                BasedOn="{StaticResource logo}">
@@ -76,7 +87,7 @@
                             Value="Visible"></Setter>
                 </DataTrigger>
 
-                </Style.Triggers>
+            </Style.Triggers>
         </Style>
 
         <Style TargetType="Image"
@@ -97,8 +108,22 @@
 
         <Style TargetType="TextBlock"
                x:Key="nombreSuperheroe">
+            <Setter Property="VerticalAlignment"
+                    Value="Bottom"></Setter>
             <Setter Property="FontSize"
                     Value="40"></Setter>
+            <Setter Property="Foreground"
+                    Value="White"></Setter>
+            <Setter Property="FontFamily"
+                    Value="Segoe UI Black"></Setter>
+            <Setter Property="Margin"
+                    Value="10,0,0,0"></Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect></DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+
             <Style.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
@@ -125,16 +150,8 @@
         <DockPanel LastChildFill="False"
                            DockPanel.Dock="Top">
             <TextBlock DockPanel.Dock="Left"
-                               VerticalAlignment="Bottom"
-                               FontSize="40"
-                               Foreground="White"
-                               FontFamily="Segoe UI Black"
-                               Margin="10,0,0,0"
                                Text="{Binding Path=HeroeActual.Nombre}"
                                Style="{StaticResource nombreSuperheroe}">
-                <TextBlock.Effect>
-                    <DropShadowEffect></DropShadowEffect>
-                </TextBlock.Effect>
             </TextBlock>
             <StackPanel Orientation="Horizontal"
                                 DockPanel.Dock="Right"
@@ -176,9 +193,8 @@
                 </Image.RenderTransform>
             </Image>
         </StackPanel>
-        <Image Style="{StaticResource imagenHeroe}" Source="{Binding Path=HeroeActual.Imagen}"
-                       Stretch="UniformToFill"
-                       Margin="10">
-        </Image>
+        <Border Style="{StaticResource bordeImagen}" Margin="10">
+            <Image x:Name="superheroeImage" Style="{StaticResource imagenHeroe}" Source="{Binding Path=HeroeActual.Imagen}" />
+        </Border>
     </DockPanel>
 </Window>
